@@ -1,0 +1,866 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday Manu ❤️</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: "Poppins", Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at top left, #ffb6c1, transparent 35%),
+                radial-gradient(circle at bottom right, #b8c6ff, transparent 35%),
+                linear-gradient(135deg, #1b102b, #35104d, #1b1838);
+
+            color: white;
+        }
+
+        /* Main container */
+
+        .container {
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+        }
+
+        /* Slides */
+
+        .slide {
+            position: absolute;
+
+            width: 90%;
+            max-width: 700px;
+
+            min-height: 500px;
+
+            padding: 45px 30px;
+
+            display: none;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.4);
+
+            animation: slideIn 1s ease;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .content {
+            width: 100%;
+        }
+
+        /* Typography */
+
+        h1 {
+            font-size: clamp(40px, 8vw, 75px);
+            margin-bottom: 20px;
+
+            background: linear-gradient(
+                90deg,
+                #ff9a9e,
+                #fad0c4,
+                #ffd1ff
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: glow 2s infinite alternate;
+        }
+
+        h2 {
+            font-size: clamp(30px, 6vw, 55px);
+            margin-bottom: 20px;
+
+            color: #ffd6f6;
+        }
+
+        p {
+            font-size: clamp(18px, 3vw, 25px);
+            line-height: 1.7;
+
+            color: #f8eaff;
+
+            margin: 15px auto;
+
+            max-width: 600px;
+        }
+
+        .small {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .emoji {
+            font-size: 70px;
+            margin-bottom: 20px;
+
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Button */
+
+        .start-btn {
+            margin-top: 30px;
+
+            padding: 14px 35px;
+
+            border: none;
+            border-radius: 30px;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                #ff4b91,
+                #ff7eb3
+            );
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 25px rgba(255, 75, 145, 0.4);
+
+            transition: 0.3s;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.08);
+        }
+
+        /* Heart */
+
+        .heart {
+            color: #ff6b9a;
+            animation: heartbeat 1.3s infinite;
+        }
+
+        /* Progress */
+
+        .progress {
+            position: fixed;
+
+            bottom: 20px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            display: flex;
+            gap: 8px;
+
+            z-index: 100;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.3);
+
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            width: 28px;
+            border-radius: 10px;
+
+            background: #ff8fbd;
+        }
+
+        /* Floating hearts */
+
+        .floating-heart {
+            position: fixed;
+
+            bottom: -30px;
+
+            font-size: 20px;
+
+            animation: floatUp linear forwards;
+
+            pointer-events: none;
+
+            z-index: 1;
+        }
+
+        /* Confetti */
+
+        .confetti {
+            position: fixed;
+
+            width: 8px;
+            height: 8px;
+
+            top: -20px;
+
+            animation: confettiFall linear forwards;
+
+            z-index: 200;
+        }
+
+        /* Animations */
+
+        @keyframes slideIn {
+
+            from {
+                opacity: 0;
+                transform: scale(0.85) translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes glow {
+
+            from {
+                filter: drop-shadow(0 0 5px #ff9a9e);
+            }
+
+            to {
+                filter: drop-shadow(0 0 25px #ff6b9a);
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes heartbeat {
+
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+        }
+
+        @keyframes floatUp {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confettiFall {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile */
+
+        @media(max-width:600px) {
+
+            .slide {
+                width: 92%;
+                min-height: 470px;
+
+                padding: 35px 20px;
+
+                border-radius: 25px;
+            }
+
+            p {
+                line-height: 1.6;
+            }
+
+            .emoji {
+                font-size: 55px;
+            }
+
+            .start-btn {
+                padding: 12px 28px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- Slide 1 -->
+
+    <section class="slide active">
+
+        <div class="content">
+
+            <div class="emoji">👀</div>
+
+            <h2>Hey Manu...</h2>
+
+            <p>
+                Wait... don't swipe away yet.
+                I made something little special for you. ❤️
+            </p>
+
+            <button class="start-btn" onclick="startSurprise()">
+                Open Your Surprise 🎁
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- Slide 2 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="emoji">✨</div>
+
+            <h2>Nanna...</h2>
+
+            <p>
+                Today isn't just another day.
+            </p>
+
+            <p>
+                It's the day someone really special
+                came into this world.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Slide 3 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="emoji">🎂</div>
+
+            <h1>Happy Birthday!</h1>
+
+            <h2>Manu ❤️</h2>
+
+            <p>
+                Wishing you a day filled with
+                happiness, laughter and lots of cake! 🎉
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Slide 4 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="emoji">🫶</div>
+
+            <h2>Dear Nanna...</h2>
+
+            <p>
+                Some people enter our lives randomly...
+            </p>
+
+            <p>
+                And somehow, they become
+                one of the most beautiful parts
+                of our story.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Slide 5 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="emoji">😂</div>
+
+            <h2>Our Memories</h2>
+
+            <p>
+                The random conversations...
+            </p>
+
+            <p>
+                The unnecessary laughs...
+            </p>
+
+            <p>
+                The crazy moments...
+            </p>
+
+            <p>
+                And all those memories
+                that somehow became special. ❤️
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Slide 6 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="emoji">🌟</div>
+
+            <h2>One Wish For You</h2>
+
+            <p>
+                I hope this new year of your life
+                brings you closer to everything
+                you've been dreaming about.
+            </p>
+
+            <p>
+                More happiness.
+                More success.
+                More beautiful memories.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Slide 7 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="emoji">💖</div>
+
+            <h2>Never Forget...</h2>
+
+            <p>
+                You are more special to people
+                than you probably realize.
+            </p>
+
+            <p>
+                So keep smiling,
+                keep shining,
+                and keep being YOU.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Slide 8 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="emoji">🎉</div>
+
+            <h1>HAPPY BIRTHDAY</h1>
+
+            <h2>MANU ❤️</h2>
+
+            <p>
+                From one person who cares about you
+                to another...
+            </p>
+
+            <p>
+                Have the most amazing birthday ever! 🥳
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Slide 9 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="emoji">🥹❤️</div>
+
+            <h2>And finally...</h2>
+
+            <p>
+                Thank you for being YOU.
+            </p>
+
+            <p>
+                Happy Birthday, Manu.
+                Happy Birthday, Nanna. ❤️
+            </p>
+
+            <p>
+                May your smile never disappear.
+                ✨
+            </p>
+
+            <div class="emoji">🎂💖🎁</div>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<!-- Progress dots -->
+
+<div class="progress">
+
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+
+</div>
+
+
+<!-- Optional music -->
+
+<audio id="birthdayMusic" loop>
+
+    <!--
+        If you have an MP3 file,
+        put it in the same folder and change the name below.
+
+        Example:
+        <source src="birthday.mp3" type="audio/mpeg">
+    -->
+
+</audio>
+
+
+<script>
+
+    let currentSlide = 0;
+
+    let slides = document.querySelectorAll(".slide");
+
+    let dots = document.querySelectorAll(".dot");
+
+    let started = false;
+
+    let slideTimer;
+
+
+    function showSlide(index) {
+
+        slides.forEach(function(slide) {
+
+            slide.classList.remove("active");
+
+        });
+
+
+        dots.forEach(function(dot) {
+
+            dot.classList.remove("active");
+
+        });
+
+
+        slides[index].classList.add("active");
+
+        dots[index].classList.add("active");
+
+    }
+
+
+    function nextSlide() {
+
+        currentSlide++;
+
+        if (currentSlide >= slides.length) {
+
+            currentSlide = 0;
+
+        }
+
+        showSlide(currentSlide);
+
+        createHearts();
+
+        if (currentSlide === slides.length - 1) {
+
+            createConfetti();
+
+        }
+
+    }
+
+
+    function startSurprise() {
+
+        if (started) return;
+
+        started = true;
+
+
+        /*
+            Try to start music.
+            Browsers allow music after user interaction.
+        */
+
+        const music =
+            document.getElementById("birthdayMusic");
+
+        if (music.src) {
+
+            music.play().catch(function(error) {
+
+                console.log("Music blocked:", error);
+
+            });
+
+        }
+
+
+        currentSlide = 1;
+
+        showSlide(currentSlide);
+
+        createHearts();
+
+
+        slideTimer = setInterval(function() {
+
+            nextSlide();
+
+        }, 4500);
+
+    }
+
+
+    /*
+        Click anywhere to move to next slide
+        after the surprise has started.
+    */
+
+    document.addEventListener("click", function(event) {
+
+        if (!started) return;
+
+        if (event.target.classList.contains("start-btn")) {
+            return;
+        }
+
+        /*
+            Only move manually if user taps outside
+            the button.
+        */
+
+        if (!event.target.closest(".start-btn")) {
+
+            nextSlide();
+
+            /*
+                Reset automatic timer
+            */
+
+            clearInterval(slideTimer);
+
+            slideTimer = setInterval(function() {
+
+                nextSlide();
+
+            }, 4500);
+
+        }
+
+    });
+
+
+    /*
+        Floating hearts
+    */
+
+    function createHearts() {
+
+        for (let i = 0; i < 5; i++) {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "floating-heart";
+
+            heart.innerHTML =
+                ["❤️","💕","💖","💗","💓"][Math.floor(Math.random()*5)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (4 + Math.random() * 4) + "s";
+
+            heart.style.fontSize =
+                (15 + Math.random() * 20) + "px";
+
+            document.body.appendChild(heart);
+
+
+            setTimeout(function() {
+
+                heart.remove();
+
+            }, 8000);
+
+        }
+
+    }
+
+
+    /*
+        Birthday confetti
+    */
+
+    function createConfetti() {
+
+        for (let i = 0; i < 80; i++) {
+
+            const piece =
+                document.createElement("div");
+
+            piece.className = "confetti";
+
+            piece.style.left =
+                Math.random() * 100 + "vw";
+
+            piece.style.animationDuration =
+                (2 + Math.random() * 3) + "s";
+
+            piece.style.background =
+                "hsl(" +
+                Math.random() * 360 +
+                ", 90%, 65%)";
+
+            piece.style.borderRadius =
+                Math.random() > 0.5 ? "50%" : "0";
+
+            document.body.appendChild(piece);
+
+
+            setTimeout(function() {
+
+                piece.remove();
+
+            }, 6000);
+
+        }
+
+    }
+
+
+    /*
+        Initial floating hearts
+    */
+
+    setInterval(function() {
+
+        if (started) {
+
+            createHearts();
+
+        }
+
+    }, 3000);
+
+
+</script>
+
+
+</body>
+
+</html>
+```
