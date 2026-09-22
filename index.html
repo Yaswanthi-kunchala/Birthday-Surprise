@@ -1,1136 +1,791 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>For Manu ❤️</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-
-            font-family: "Poppins", Arial, sans-serif;
-
-            color: white;
-
-            background:
-                radial-gradient(circle at 20% 20%, #ff9eb5, transparent 30%),
-                radial-gradient(circle at 80% 80%, #8fa7ff, transparent 30%),
-                linear-gradient(135deg, #160d27, #351044, #15142f);
-        }
-
-        /* Background stars */
-
-        .stars {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .star {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: twinkle 2s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            from {
-                opacity: 0.2;
-                transform: scale(0.7);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1.4);
-            }
-        }
-
-        /* Main */
-
-        .container {
-            width: 100%;
-            height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            position: relative;
-        }
-
-        /* Slide */
-
-        .slide {
-            position: absolute;
-
-            width: 90%;
-            max-width: 720px;
-
-            min-height: 520px;
-
-            padding: 45px 35px;
-
-            display: none;
-
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-
-            border-radius: 30px;
-
-            background: rgba(255, 255, 255, 0.09);
-
-            border: 1px solid rgba(255, 255, 255, 0.18);
-
-            backdrop-filter: blur(18px);
-
-            box-shadow:
-                0 20px 70px rgba(0,0,0,0.45);
-
-            animation: slideIn 1s ease;
-        }
-
-        .slide.active {
-            display: flex;
-        }
-
-        .content {
-            width: 100%;
-        }
-
-        /* Text */
-
-        h1 {
-            font-size: clamp(42px, 9vw, 78px);
-
-            margin-bottom: 18px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ff9a9e,
-                    #fad0c4,
-                    #ffd6ff
-                );
-
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            animation: glow 2s infinite alternate;
-        }
-
-        h2 {
-            font-size: clamp(30px, 6vw, 55px);
-
-            margin-bottom: 20px;
-
-            color: #ffd9f3;
-        }
-
-        p {
-            font-size: clamp(18px, 3.1vw, 25px);
-
-            line-height: 1.7;
-
-            color: #faecff;
-
-            max-width: 620px;
-
-            margin: 14px auto;
-        }
-
-        .highlight {
-            color: #ffb4d4;
-            font-weight: bold;
-        }
-
-        .small {
-            font-size: 16px;
-            opacity: 0.75;
-        }
-
-        /* Emoji */
-
-        .emoji {
-            font-size: 65px;
-
-            margin-bottom: 18px;
-
-            animation: bounce 1.8s infinite;
-        }
-
-        /* Button */
-
-        .start-btn {
-            margin-top: 28px;
-
-            padding: 15px 35px;
-
-            border: none;
-
-            border-radius: 35px;
-
-            color: white;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff4f91,
-                    #ff78ad
-                );
-
-            box-shadow:
-                0 8px 30px rgba(255, 75, 145, 0.45);
-
-            cursor: pointer;
-
-            transition: 0.3s;
-        }
-
-        .start-btn:hover {
-            transform: scale(1.08);
-        }
-
-        /* Progress */
-
-        .progress {
-            position: fixed;
-
-            bottom: 20px;
-
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            display: flex;
-
-            gap: 7px;
-
-            z-index: 100;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-
-            border-radius: 50%;
-
-            background: rgba(255,255,255,0.3);
-
-            transition: 0.3s;
-        }
-
-        .dot.active {
-            width: 27px;
-
-            border-radius: 10px;
-
-            background: #ff9ac5;
-        }
-
-        /* Floating hearts */
-
-        .floating-heart {
-            position: fixed;
-
-            bottom: -30px;
-
-            pointer-events: none;
-
-            z-index: 2;
-
-            animation: floatUp linear forwards;
-        }
-
-        @keyframes floatUp {
-
-            0% {
-                transform:
-                    translateY(0)
-                    rotate(0deg);
-
-                opacity: 1;
-            }
-
-            100% {
-                transform:
-                    translateY(-110vh)
-                    rotate(360deg);
-
-                opacity: 0;
-            }
-        }
-
-        /* Confetti */
-
-        .confetti {
-            position: fixed;
-
-            width: 9px;
-            height: 9px;
-
-            top: -20px;
-
-            z-index: 200;
-
-            animation:
-                fall linear forwards;
-        }
-
-        @keyframes fall {
-
-            0% {
-                transform:
-                    translateY(0)
-                    rotate(0deg);
-
-                opacity: 1;
-            }
-
-            100% {
-                transform:
-                    translateY(110vh)
-                    rotate(720deg);
-
-                opacity: 0;
-            }
-        }
-
-        /* Animations */
-
-        @keyframes slideIn {
-
-            from {
-                opacity: 0;
-
-                transform:
-                    scale(0.88)
-                    translateY(35px);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    scale(1)
-                    translateY(0);
-            }
-        }
-
-        @keyframes glow {
-
-            from {
-                filter:
-                    drop-shadow(
-                        0 0 5px #ff9a9e
-                    );
-            }
-
-            to {
-                filter:
-                    drop-shadow(
-                        0 0 25px #ff6b9a
-                    );
-            }
-        }
-
-        @keyframes bounce {
-
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-
-        /* Mobile */
-
-        @media(max-width:600px) {
-
-            .slide {
-                width: 92%;
-
-                min-height: 500px;
-
-                padding:
-                    35px 20px;
-            }
-
-            .emoji {
-                font-size: 52px;
-            }
-
-            p {
-                font-size: 18px;
-                line-height: 1.65;
-            }
-
-            .start-btn {
-                font-size: 16px;
-                padding: 13px 28px;
-            }
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Someone Special ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, #ffd6e7, transparent 35%),
+        radial-gradient(circle at bottom right, #c9e7ff, transparent 35%),
+        linear-gradient(135deg,#fff0f6,#e9f4ff);
+    color:#333;
+}
+
+/* Background stars */
+
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+    color:white;
+    font-size:15px;
+    animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:.2;
+        transform:scale(.7);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.2);
+    }
+}
+
+/* Main card */
+
+.card{
+    width:92%;
+    max-width:850px;
+    min-height:520px;
+    padding:45px 30px;
+    border-radius:30px;
+
+    background:rgba(255,255,255,.62);
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.15),
+        inset 0 1px 1px rgba(255,255,255,.8);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Slides */
+
+.slide{
+    display:none;
+    width:100%;
+    animation:slideIn 1.2s ease;
+}
+
+.slide.active{
+    display:block;
+}
+
+@keyframes slideIn{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.small{
+    font-size:18px;
+    letter-spacing:2px;
+    color:#777;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:clamp(40px,8vw,75px);
+    color:#e63968;
+    margin-bottom:20px;
+}
+
+h2{
+    font-size:clamp(28px,5vw,45px);
+    color:#d6336c;
+    margin-bottom:25px;
+}
+
+.message{
+    font-size:clamp(19px,3vw,25px);
+    line-height:1.8;
+    max-width:720px;
+    margin:auto;
+    color:#444;
+}
+
+.deep{
+    font-size:clamp(21px,3.2vw,28px);
+    line-height:1.9;
+    color:#333;
+}
+
+.heart{
+    color:#e63968;
+    font-size:55px;
+    animation:heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.18);
+    }
+}
+
+/* Name - subtle */
+
+.name{
+    color:#d6336c;
+    font-weight:600;
+}
+
+/* Divider */
+
+.line{
+    width:80px;
+    height:3px;
+    background:#e63968;
+    border-radius:10px;
+    margin:25px auto;
+}
+
+/* Button */
+
+.start-btn{
+    margin-top:30px;
+    padding:14px 32px;
+    border:none;
+    border-radius:30px;
+    background:#e63968;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(230,57,104,.3);
+    transition:.3s;
+}
+
+.start-btn:hover{
+    transform:scale(1.06);
+}
+
+/* Progress */
+
+.progress{
+    position:absolute;
+    bottom:22px;
+    display:flex;
+    gap:7px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#ccc;
+    transition:.4s;
+}
+
+.dot.active{
+    background:#e63968;
+    transform:scale(1.4);
+}
+
+/* Floating hearts */
+
+.floating-heart{
+    position:fixed;
+    bottom:-30px;
+    font-size:20px;
+    animation:floatUp 7s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) rotate(0);
+        opacity:0;
+    }
+    10%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* Final */
+
+.final h1{
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 5px rgba(230,57,104,.2);
+    }
+    to{
+        text-shadow:
+            0 0 20px rgba(230,57,104,.5),
+            0 0 40px rgba(230,57,104,.2);
+    }
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+    .card{
+        min-height:560px;
+        padding:35px 20px;
+        border-radius:25px;
+    }
+
+    .message{
+        line-height:1.7;
+    }
+
+    .deep{
+        line-height:1.75;
+    }
+
+}
+
+</style>
 </head>
 
 
 <body>
 
-
-<!-- Stars -->
-
-<div class="stars" id="stars"></div>
-
-
-<div class="container">
-
-
-    <!-- SLIDE 1 -->
-
-    <section class="slide active">
-
-        <div class="content">
-
-            <div class="emoji">👀</div>
-
-            <h2>Hey Manu...</h2>
-
-            <p>
-                Before you continue...
-            </p>
-
-            <p>
-                I made this little something
-                especially for you.
-            </p>
-
-            <button
-                class="start-btn"
-                onclick="startSurprise()">
-
-                Open Your Surprise 🎁
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 2 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">✨</div>
-
-            <h2>Nanna...</h2>
-
-            <p>
-                Some people are just people
-                we meet along the way.
-            </p>
-
-            <p>
-                And then there are a few
-                who slowly become
-                <span class="highlight">
-                    a part of our heart.
-                </span>
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 3 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">❤️</div>
-
-            <h2>Kannaya...</h2>
-
-            <p>
-                You are one of those
-                very few people for me.
-            </p>
-
-            <p>
-                Someone whose place in my life
-                is difficult to explain in words.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 4 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">🫶</div>
-
-            <h2>Something I Want You To Know</h2>
-
-            <p>
-                There are many important people
-                in our lives...
-            </p>
-
-            <p>
-                But for me, after my mother,
-                <span class="highlight">
-                    you hold a very special place.
-                </span>
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 5 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">🥹</div>
-
-            <h2>Why You Are Special</h2>
-
-            <p>
-                It's not because of one particular
-                thing you did.
-            </p>
-
-            <p>
-                It's because of all the little things...
-                the conversations,
-                the support,
-                the laughs,
-                and simply your presence.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 6 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">😂</div>
-
-            <h2>And Of Course...</h2>
-
-            <p>
-                All those random conversations...
-            </p>
-
-            <p>
-                The stupid jokes...
-            </p>
-
-            <p>
-                The unnecessary laughs...
-            </p>
-
-            <p>
-                And those moments that
-                somehow became beautiful memories. ❤️
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 7 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">🎂</div>
-
-            <h1>Happy Birthday!</h1>
-
-            <h2>Manu ❤️</h2>
-
-            <p>
-                Today is your day.
-            </p>
-
-            <p>
-                And I genuinely hope
-                you have the happiest birthday ever.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 8 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">🌟</div>
-
-            <h2>My Wish For You</h2>
-
-            <p>
-                May this year bring you
-                countless reasons to smile.
-            </p>
-
-            <p>
-                May you achieve the things
-                you've been working for.
-            </p>
-
-            <p>
-                And may life give you
-                all the happiness you deserve.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 9 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">🤍</div>
-
-            <h2>Nanna...</h2>
-
-            <p>
-                No matter how life changes,
-                I hope you always remember
-                one thing.
-            </p>
-
-            <p>
-                <span class="highlight">
-                    You matter.
-                </span>
-            </p>
-
-            <p>
-                More than you probably realize.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 10 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">💖</div>
-
-            <h2>For My Kannaya</h2>
-
-            <p>
-                Thank you for being someone
-                I can genuinely call special.
-            </p>
-
-            <p>
-                Thank you for the memories,
-                the smiles,
-                the conversations,
-                and simply for being there.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SLIDE 11 -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">🥰</div>
-
-            <h2>One Last Thing...</h2>
-
-            <p>
-                I don't always know how to
-                express everything I feel.
-            </p>
-
-            <p>
-                So I made this little website
-                to say something simple...
-            </p>
-
-            <p>
-                <span class="highlight">
-                    You are truly special to me.
-                </span>
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- FINAL SLIDE -->
-
-    <section class="slide">
-
-        <div class="content">
-
-            <div class="emoji">🎉❤️🎂</div>
-
-            <h1>HAPPY BIRTHDAY</h1>
-
-            <h2>MANU</h2>
-
-            <p>
-                My Nanna.
-            </p>
-
-            <p>
-                My Kannaya.
-            </p>
-
-            <p>
-                Someone who holds
-                a very special place in my heart.
-            </p>
-
-            <p>
-                Keep smiling.
-                Keep shining.
-                And always stay the amazing person
-                you are. ❤️
-            </p>
-
-            <div class="emoji">
-                🫶✨🎁
-            </div>
-
-        </div>
-
-    </section>
-
-
+<!-- Background Stars -->
+
+<div class="stars">
+    <span class="star" style="top:10%;left:15%;">✦</span>
+    <span class="star" style="top:20%;left:80%;animation-delay:1s;">✦</span>
+    <span class="star" style="top:70%;left:10%;animation-delay:2s;">✦</span>
+    <span class="star" style="top:80%;left:85%;animation-delay:.5s;">✦</span>
+    <span class="star" style="top:35%;left:90%;animation-delay:1.5s;">✦</span>
+    <span class="star" style="top:60%;left:75%;animation-delay:2.5s;">✦</span>
 </div>
 
 
-<!-- Progress dots -->
+<div class="card">
 
-<div class="progress">
+    <!-- Slide 1 -->
 
-    <div class="dot active"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
+    <div class="slide active">
+
+        <div class="small">A little something for you...</div>
+
+        <h1>Hey Manu ❤️</h1>
+
+        <div class="line"></div>
+
+        <p class="message">
+            Today is your day...
+            but somehow, I feel like I should be the one
+            celebrating because life gave me someone like you.
+        </p>
+
+        <button class="start-btn" onclick="startSurprise()">
+            Start the Surprise ❤️
+        </button>
+
+    </div>
+
+
+    <!-- Slide 2 -->
+
+    <div class="slide">
+
+        <div class="small">There is something I want to tell you...</div>
+
+        <h2>Maybe I don't say it enough.</h2>
+
+        <p class="deep">
+            But there are certain people who slowly become
+            a beautiful part of your life without you even
+            realizing when it happened.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 3 -->
+
+    <div class="slide">
+
+        <div class="heart">♥</div>
+
+        <p class="deep">
+            And somewhere along the way,
+            you became one of those people for me.
+        </p>
+
+        <div class="line"></div>
+
+        <p class="message">
+            Not because of one particular moment...
+            but because of all the little moments together.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 4 -->
+
+    <div class="slide">
+
+        <div class="small">Some people are...</div>
+
+        <h2>More than just people.</h2>
+
+        <p class="deep">
+            They become comfort.
+            They become memories.
+            They become a reason to smile
+            even on ordinary days.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 5 -->
+
+    <div class="slide">
+
+        <p class="deep">
+            You are someone whose presence
+            started meaning more to me
+            than I ever expected.
+        </p>
+
+        <div class="line"></div>
+
+        <p class="message">
+            And honestly...
+            I wouldn't want to change that.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 6 -->
+
+    <div class="slide">
+
+        <div class="small">Nanna...</div>
+
+        <h2>There is a place you have in my life.</h2>
+
+        <p class="deep">
+            A place that isn't easy to explain,
+            because some bonds are felt much more deeply
+            than they can ever be put into words.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 7 -->
+
+    <div class="slide">
+
+        <p class="deep">
+            I don't always know the right words
+            to explain how much someone means to me.
+        </p>
+
+        <div class="line"></div>
+
+        <p class="deep">
+            But if my heart could speak for me,
+            it would probably say...
+        </p>
+
+    </div>
+
+
+    <!-- Slide 8 -->
+
+    <div class="slide">
+
+        <div class="heart">❤️</div>
+
+        <p class="deep">
+            "Please stay in my life
+            for a very, very long time."
+        </p>
+
+        <div class="line"></div>
+
+        <p class="message">
+            That's all.
+            Nothing complicated.
+            Just that.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 9 -->
+
+    <div class="slide">
+
+        <div class="small">Kanna...</div>
+
+        <p class="deep">
+            I hope you always remember
+            that you are deeply valued,
+            genuinely cared for,
+            and loved in your own special way.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 10 -->
+
+    <div class="slide">
+
+        <h2>For your birthday...</h2>
+
+        <p class="deep">
+            I don't just wish you money,
+            success, or achievements.
+        </p>
+
+        <div class="line"></div>
+
+        <p class="message">
+            I wish you peace in your heart,
+            happiness that feels real,
+            people who truly understand you,
+            and a life that makes you proud.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 11 -->
+
+    <div class="slide">
+
+        <p class="deep">
+            I hope this new year of your life
+            brings you moments that you will
+            remember with a smile years from now.
+        </p>
+
+        <div class="line"></div>
+
+        <p class="message">
+            And whenever life gets difficult,
+            I hope you remember how many reasons
+            you have to keep going.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 12 -->
+
+    <div class="slide">
+
+        <p class="deep">
+            Some memories may look small
+            when we are living them...
+        </p>
+
+        <div class="line"></div>
+
+        <p class="deep">
+            but later,
+            they become the moments
+            we never want to lose.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 13 -->
+
+    <div class="slide">
+
+        <p class="deep">
+            So thank you...
+        </p>
+
+        <div class="line"></div>
+
+        <p class="message">
+            For the laughs.
+            For the conversations.
+            For the memories.
+            For simply being there.
+        </p>
+
+        <p class="deep" style="margin-top:20px;">
+            And most importantly,
+            thank you for being you.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 14 -->
+
+    <div class="slide">
+
+        <div class="heart">♥</div>
+
+        <p class="deep">
+            No matter how much life changes,
+            I hope one thing never changes...
+        </p>
+
+        <div class="line"></div>
+
+        <p class="deep">
+            The beautiful place
+            you have in my life.
+        </p>
+
+    </div>
+
+
+    <!-- Slide 15 -->
+
+    <div class="slide">
+
+        <div class="small">One last thing...</div>
+
+        <p class="deep">
+            If I could give you one gift
+            beyond anything I could buy,
+            it would be the ability to see yourself
+            through the eyes of the people
+            who genuinely care about you.
+        </p>
+
+        <div class="line"></div>
+
+        <p class="message">
+            Maybe then you would understand
+            just how special you really are.
+        </p>
+
+    </div>
+
+
+    <!-- Final Slide -->
+
+    <div class="slide final">
+
+        <div class="heart">❤️</div>
+
+        <h1>Happy Birthday, Manu!</h1>
+
+        <div class="line"></div>
+
+        <p class="deep">
+            Stay happy.
+            Stay the same beautiful person you are.
+            Keep smiling.
+        </p>
+
+        <p class="message" style="margin-top:25px;">
+            And Nanna...
+            I hope life gives you
+            all the happiness you deserve.
+        </p>
+
+        <p class="message" style="margin-top:20px;">
+            Happy Birthday, Kanna ❤️
+        </p>
+
+    </div>
+
+
+    <!-- Progress Dots -->
+
+    <div class="progress" id="progress"></div>
 
 </div>
-
-
-<!-- Optional music -->
-
-<audio id="birthdayMusic" loop>
-
-    <!--
-        If you have a birthday.mp3 file,
-        put it in the same folder and use:
-
-        <source src="birthday.mp3" type="audio/mpeg">
-    -->
-
-</audio>
 
 
 <script>
 
+const slides = document.querySelectorAll(".slide");
 
-    /* -------------------------
-       CREATE STARS
-    ------------------------- */
+let currentSlide = 0;
+let timer = null;
+let started = false;
 
-    const stars =
-        document.getElementById("stars");
+const progress = document.getElementById("progress");
 
-    for (let i = 0; i < 80; i++) {
 
-        const star =
-            document.createElement("div");
+/* Create progress dots */
 
-        star.className = "star";
+slides.forEach((slide, index) => {
 
-        star.style.left =
-            Math.random() * 100 + "%";
+    const dot = document.createElement("span");
 
-        star.style.top =
-            Math.random() * 100 + "%";
+    dot.classList.add("dot");
 
-        star.style.animationDelay =
-            Math.random() * 2 + "s";
-
-        stars.appendChild(star);
+    if(index === 0){
+        dot.classList.add("active");
     }
 
+    progress.appendChild(dot);
 
-    /* -------------------------
-       SLIDES
-    ------------------------- */
-
-    let slides =
-        document.querySelectorAll(".slide");
-
-    let dots =
-        document.querySelectorAll(".dot");
-
-    let currentSlide = 0;
-
-    let started = false;
-
-    let slideTimer;
+});
 
 
-    function showSlide(index) {
-
-        slides.forEach(function(slide) {
-
-            slide.classList.remove("active");
-
-        });
+const dots = document.querySelectorAll(".dot");
 
 
-        dots.forEach(function(dot) {
+function showSlide(index){
 
-            dot.classList.remove("active");
+    slides.forEach(slide => {
+        slide.classList.remove("active");
+    });
 
-        });
+    dots.forEach(dot => {
+        dot.classList.remove("active");
+    });
+
+    slides[index].classList.add("active");
+    dots[index].classList.add("active");
+
+}
 
 
-        slides[index].classList.add("active");
+/* Next slide */
 
-        dots[index].classList.add("active");
+function nextSlide(){
 
-    }
-
-
-    function nextSlide() {
+    if(currentSlide < slides.length - 1){
 
         currentSlide++;
 
-        if (currentSlide >= slides.length) {
-
-            currentSlide = 0;
-
-        }
-
         showSlide(currentSlide);
 
-        createHearts();
+    }else{
 
-
-        /* Confetti on final slide */
-
-        if (currentSlide === slides.length - 1) {
-
-            createConfetti();
-
-        }
+        clearInterval(timer);
 
     }
 
-
-    /* -------------------------
-       START SURPRISE
-    ------------------------- */
-
-    function startSurprise() {
-
-        if (started) return;
-
-        started = true;
+}
 
 
-        /* Music */
+/* Start automatic surprise */
 
-        const music =
-            document.getElementById(
-                "birthdayMusic"
-            );
+function startSurprise(){
 
-        if (music.src) {
+    if(started) return;
 
-            music.play().catch(function() {
+    started = true;
 
-                console.log(
-                    "Music could not start."
-                );
+    /* Hide button */
 
-            });
+    const button = document.querySelector(".start-btn");
 
-        }
-
-
-        currentSlide = 1;
-
-        showSlide(currentSlide);
-
-        createHearts();
-
-
-        /*
-            6 SECONDS PER SLIDE
-
-            6000 milliseconds
-            = 6 seconds
-        */
-
-        slideTimer =
-            setInterval(function() {
-
-                nextSlide();
-
-            }, 6000);
-
+    if(button){
+        button.style.display = "none";
     }
 
+    /* Move to slide 2 */
 
-    /* -------------------------
-       CLICK TO NEXT SLIDE
-    ------------------------- */
+    nextSlide();
 
-    document.addEventListener(
-        "click",
-        function(event) {
+    /* 6 seconds per slide */
 
-            if (!started) return;
+    timer = setInterval(nextSlide,6000);
 
-            if (
-                event.target.closest(
-                    ".start-btn"
-                )
-            ) {
-                return;
-            }
+}
 
+
+/* Click anywhere after starting */
+
+document.addEventListener("click",function(event){
+
+    if(
+        started &&
+        !event.target.classList.contains("start-btn")
+    ){
+
+        if(currentSlide < slides.length - 1){
 
             nextSlide();
 
+            /* Restart 6 second timer */
 
-            /*
-                Restart 6-second timer
-            */
+            clearInterval(timer);
 
-            clearInterval(slideTimer);
-
-            slideTimer =
-                setInterval(function() {
-
-                    nextSlide();
-
-                }, 6000);
-
-        }
-    );
-
-
-    /* -------------------------
-       FLOATING HEARTS
-    ------------------------- */
-
-    function createHearts() {
-
-        for (let i = 0; i < 6; i++) {
-
-            const heart =
-                document.createElement("div");
-
-            heart.className =
-                "floating-heart";
-
-            const heartList = [
-                "❤️",
-                "💕",
-                "💖",
-                "💗",
-                "💓",
-                "🤍"
-            ];
-
-            heart.innerHTML =
-                heartList[
-                    Math.floor(
-                        Math.random() *
-                        heartList.length
-                    )
-                ];
-
-
-            heart.style.left =
-                Math.random() * 100 + "vw";
-
-
-            heart.style.fontSize =
-                (15 + Math.random() * 20)
-                + "px";
-
-
-            heart.style.animationDuration =
-                (5 + Math.random() * 4)
-                + "s";
-
-
-            document.body.appendChild(
-                heart
-            );
-
-
-            setTimeout(function() {
-
-                heart.remove();
-
-            }, 9000);
+            timer = setInterval(nextSlide,6000);
 
         }
 
     }
 
-
-    /* -------------------------
-       CONFETTI
-    ------------------------- */
-
-    function createConfetti() {
-
-        for (let i = 0; i < 100; i++) {
-
-            const piece =
-                document.createElement("div");
-
-            piece.className =
-                "confetti";
+});
 
 
-            piece.style.left =
-                Math.random() * 100 + "vw";
+/* Floating hearts */
+
+function createHeart(){
+
+    if(!started) return;
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    heart.innerHTML = Math.random() > .5 ? "❤️" : "♡";
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 20) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    },9000);
+
+}
+
+setInterval(createHeart,900);
 
 
-            piece.style.background =
-                "hsl(" +
-                Math.random() * 360 +
-                ", 90%, 65%)";
-
-
-            piece.style.animationDuration =
-                (2 + Math.random() * 3)
-                + "s";
-
-
-            piece.style.borderRadius =
-                Math.random() > 0.5
-                ? "50%"
-                : "0";
-
-
-            document.body.appendChild(
-                piece
-            );
-
-
-            setTimeout(function() {
-
-                piece.remove();
-
-            }, 6000);
-
-        }
-
-    }
-
-
-    /* -------------------------
-       CONTINUOUS HEARTS
-    ------------------------- */
-
-    setInterval(function() {
-
-        if (started) {
-
-            createHearts();
-
-        }
-
-    }, 3500);
-
+/* Create initial stars */
 
 </script>
 
-
 </body>
-
 </html>
-```
